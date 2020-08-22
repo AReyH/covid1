@@ -21,13 +21,13 @@ def fit_data_to_function(
 
     params, _ = curve_fit(function, x, y, p0=initial_guess)
     plt.figure(figsize=(16,9))
-    plt.plot(x, y, ".", label="Casos Reportados")
+    plt.plot(x, y, ".", label="Reported cases")
     y_fit = function(x, *params)
     print(r2_score(y, y_fit))
     if plot:
-        plt.plot(x, y_fit, label="Fitted curve")
-        plt.xlabel("Dias desde el primer caso confirmado",size=18)
-        plt.ylabel("Casos",size=18)
+        plt.plot(x, y_fit, linewidth=2,label="Fitted curve")
+        plt.xlabel("Days since first confirmed case",size=18)
+        plt.ylabel("Cases",size=18)
         plt.grid()
         plt.legend()
         plt.show()
@@ -67,13 +67,24 @@ def bell_curve(data1,data2):
   s = pd.concat([arr_, arr])
   plt.figure(figsize=(16,9))
   plt.bar(np.arange(len(s)),s)
-  plt.axvline(x=len(arr_), color="red", label="Hoy")
-  plt.xlabel("Dias desde el primer caso confirmado",size=18)
-  plt.ylabel("Casos confirmados diariamente",size=18)
+  plt.axvline(x=len(arr_), color="red", label="Today")
+  plt.xlabel("Days since first confirmed case",size=18)
+  plt.ylabel("Daily confirmed cases",size=18)
   plt.legend()
   plt.show()
   return s
 
+def load_deaths(data):
+  df1 = df[df["location"]=='Colombia']
+  deaths = df1[df1["total_deaths"] > 0]
+  deaths = deaths["total_deaths"].values
+  x_deaths = np.arange(len(deaths))
+  plt.figure(figsize=(16,9))
+  plt.plot(x_deaths,deaths,'r',linewidth=3)
+  plt.grid()
+  plt.xlabel('Days since first confirmed case',size=18)
+  plt.ylabel('Number of deaths',size=18)
+  plt.show()
 
 df = pd.read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv")
 df1 = df[df["location"]=="Colombia"]
@@ -97,6 +108,7 @@ y_cummulative = daily_increase(cases_added)
 peak_day = int(np.array(y_cummulative[1:]).argmax())
 day_of_peak = (pd.to_datetime(date.today()) + pd.DateOffset(days=peak_day)).strftime('%Y-%m-%d')
 #print(peak_day)
+params_table = pd.DataFrame(data=params, index=['a','b','c','d'],columns=['Parameter value'])
 if __name__ == "__main__":
     print(params)
     diff = 100
