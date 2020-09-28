@@ -105,8 +105,8 @@ days, confirmed, cases_added = plateau(
 )
 y_cummulative = daily_increase(cases_added)
 
-peak_day = int(np.array(y_cummulative[1:]).argmax())
-day_of_peak = (pd.to_datetime(date.today()) + pd.DateOffset(days=peak_day)).strftime('%Y-%m-%d')
+#peak_day = int(np.array(y_cummulative[1:]).argmax())
+#day_of_peak = (pd.to_datetime(date.today()) + pd.DateOffset(days=peak_day)).strftime('%Y-%m-%d')
 #print(peak_day)
 params_table = pd.DataFrame(data=params, index=['a','b','c','d'],columns=['Parameter value'])
 if __name__ == "__main__":
