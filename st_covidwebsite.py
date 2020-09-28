@@ -29,7 +29,7 @@ if select == "COVID-19 en Colombia":
         st.markdown('Where a, b, c, and d are learnable parameters**, and x being the independent variable.')
         covid3.bell_curve(covid3.y, covid3.y_cummulative)
         st.pyplot()
-        st.write(f'The estimated peak will be on {covid3.day_of_peak}')
+        #st.write(f'The estimated peak will be on {covid3.day_of_peak}')
     if st.sidebar.checkbox("Show graph for current reported cases", True):
         st.markdown(f"### Current COVID-19 cases in Colombia as of {dt.datetime.today().strftime('%Y-%m-%d')}")
         st.markdown("The following curve is the number of confirmed cases through time. It has been fitted with the previously mentioned Logistic Regression function.")
