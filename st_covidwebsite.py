@@ -4,7 +4,7 @@ import numpy as np
 import covid3
 import matplotlib.pyplot as plt
 import datetime as dt
-import seaborn as sns
+
 
 st.title("Daily COVID-19 Report in Colombia")
 st.markdown("### By Arturo Rey")
